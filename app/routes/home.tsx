@@ -122,9 +122,6 @@ export default function Home() {
                 >
                   <div className="preview">
                     <img src={renderedImage || sourceImage} alt="projects" />
-                    <div className="badge">
-                      <span>Community</span>
-                    </div>
                   </div>
                   <div className="card-body">
                     <div>
