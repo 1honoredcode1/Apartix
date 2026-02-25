@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import { ArrowRight, ArrowUpRight, Clock, Layers } from "lucide-react";
 
 import type { Route } from "./+types/home";
 
 import Navbar from "components/Navbar";
 import { Button } from "components/ui/Button";
+import Upload from "components/Upload";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,6 +15,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleUploadComplete = async (base64Image: string) => {
+    const newId = Date.now().toString();
+    navigate(`/visualizer/${newId}`);
+    return true;
+  };
+
   return (
     <div className="home">
       <Navbar />
@@ -23,9 +33,7 @@ export default function Home() {
           </div>
           <p>Introducing Apartix</p>
         </div>
-        <h1 className="">
-          Build your dream space at the blink of an eye with Apartix
-        </h1>
+        <h1>Build your dream space at the blink of an eye with Apartix</h1>
         <p className="subtitle">
           Apartix is an AI design environment that helps you visualize, render
           and ship architectural projects faster than ever.
@@ -48,7 +56,7 @@ export default function Home() {
               <h3 className="">Upload your floor plan</h3>
               <p>Supports JPG, PNG, formats up to 10MB</p>
             </div>
-            <p>Upload images</p>
+            <Upload onComplete={handleUploadComplete} />
           </div>
         </div>
       </section>
